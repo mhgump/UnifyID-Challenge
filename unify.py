@@ -144,9 +144,10 @@ def write_rsa_key(priv,pub):
 	f.write(pub)
 	f.close()
 
-# bits = 1024
-# priv,pub = generate_rsa_key(bits)
-# write_rsa_key(priv,pub)
+# Generate an RSA public/private key pair
+bits = 1024
+priv,pub = generate_rsa_key(bits)
+write_rsa_key(priv,pub)
 
 
 
