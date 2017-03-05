@@ -66,8 +66,7 @@ def generate_blobs(num_bits,chunks):
 		},
 		"id": 42
 	}
-	if num_bits*chunks>get_usage():
-		api_key = api_keys.pop()
+	
 	response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 	result = None
 	try:
@@ -90,8 +89,7 @@ def generate_integers(min,max,n):
 		},
 		"id": 42
 	}
-	if math.log(max-min)*n>get_usage():
-		api_key = api_keys.pop()
+
 	response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 	result = None
 	try:
