@@ -5,11 +5,13 @@
 
 ## Refrences :
 
+# https://api.random.org/api-keys/beta
 # https://pypi.python.org/pypi/json-rpc
 # https://api.random.org/json-rpc/1/introduction
 # https://en.wikibooks.org/wiki/Python_Imaging_Library/Editing_Pixels
+# https://www.dlitz.net/software/pycrypto/api/current/Crypto-module.html
 
-### First Beta Key : 1b559a30-1759-4678-b968-ea671a497298
+### Beta Key : 1b559a30-1759-4678-b968-ea671a497298
 ### Request One @ https://api.random.org/api-keys/beta
 
 import requests
@@ -25,10 +27,7 @@ url = "https://api.random.org/json-rpc/1/invoke"
 
 ## We need at least two API keys do make a 128*128*3 image
 
-api_keys = ["1b799a1d-3c60-4bf5-84a0-071c30998c95", #random1unifyid@gmail.com
-			"4dceb12f-4a58-4c05-b287-53636edd93dc"  #random2unifyid@gmail.com
-			]
-api_key = api_keys.pop()
+api_key = '1b559a30-1759-4678-b968-ea671a497298'
 
 headers = {'content-type': 'application/json'}
 
@@ -36,7 +35,7 @@ headers = {'content-type': 'application/json'}
 def get_usage():
 	global api_key 
 	global api_keys
-	
+
 	payload = {
 	"jsonrpc": "2.0",
 	"method": "getUsage",
@@ -117,12 +116,12 @@ def random_rgb(size,filename = 'random_rgb.bmp'):
 	img.save(filename)
 
 # random_rgb(128) #will take 393216 bits, more than a beta key's 250000 available bits
-
+# I can not do this without getting multiple beta keys which will probably get me banned
 
 # Test, 2400 bits
-print(get_usage())
-random_rgb(10,filename = 'test.bmp')
-print(get_usage())
+# print(get_usage())
+# random_rgb(10,filename = 'test.bmp')
+# print(get_usage())
 
 def random_dot_org(n):
 	return generate_blobs(n*8,1)[0].decode('hex')
@@ -137,10 +136,17 @@ def generate_rsa_key(bits):
 	private_key = keys.exportKey("PEM") 
 	return private_key, public_key
 
+def write_rsa_key(priv,pub):
+	f = open('private_key.pem','wb')
+	f.write(priv)
+	f.close()
+	f = open('public_key.pub','wb')
+	f.write(pub)
+	f.close()
+
 # bits = 1024
-# print(get_usage()) ## Will use about 2*bits
-# print(generate_rsa_key(bits))
-# print(get_usage())
+# priv,pub = generate_rsa_key(bits)
+# write_rsa_key(priv,pub)
 
 
 
