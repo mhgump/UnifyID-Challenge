@@ -3,7 +3,7 @@
 ## Random.org
 ## By Michael Gump
 
-## Refrences :
+## References :
 
 # https://api.random.org/api-keys/beta
 # https://pypi.python.org/pypi/json-rpc
@@ -25,7 +25,8 @@ import random
 
 url = "https://api.random.org/json-rpc/1/invoke"
 
-## We need at least two API keys do make a 128*128*3 image
+## We need at least two API keys to make a 128*128*3 image
+## What to do what to do
 
 api_key = '1b559a30-1759-4678-b968-ea671a497298'
 
@@ -34,16 +35,15 @@ headers = {'content-type': 'application/json'}
 
 def get_usage():
 	global api_key 
-	global api_keys
 
 	payload = {
-	"jsonrpc": "2.0",
-	"method": "getUsage",
-	"params": {
-		"apiKey": api_key
-	},
-	"id": 15998
-}
+			"jsonrpc": "2.0",
+			"method": "getUsage",
+			"params": {
+				"apiKey": api_key
+			},
+			"id": 15998
+		}
 	response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 	result = None
 	try:
@@ -53,19 +53,18 @@ def get_usage():
 	return result
 def generate_blobs(num_bits,chunks):
 	global api_key 
-	global api_keys
 
 	payload = {
-		"jsonrpc": "2.0",
-		"method": "generateBlobs",
-		"params": {
-			"apiKey": api_key,
-			"n": chunks,
-			"size": num_bits,
-			"format": "hex"
-		},
-		"id": 42
-	}
+			"jsonrpc": "2.0",
+			"method": "generateBlobs",
+			"params": {
+				"apiKey": api_key,
+				"n": chunks,
+				"size": num_bits,
+				"format": "hex"
+			},
+			"id": 42
+		}
 	
 	response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 	result = None
@@ -76,19 +75,18 @@ def generate_blobs(num_bits,chunks):
 	return result
 def generate_integers(min,max,n):
 	global api_key
-	global api_keys
 
 	payload = {
-		"jsonrpc": "2.0",
-		"method": "generateIntegers",
-		"params": {
-			"apiKey": api_key,
-			"n": n,
-			"min": min,
-			"max": max
-		},
-		"id": 42
-	}
+			"jsonrpc": "2.0",
+			"method": "generateIntegers",
+			"params": {
+				"apiKey": api_key,
+				"n": n,
+				"min": min,
+				"max": max
+			},
+			"id": 42
+		}
 
 	response = requests.post(url, data=json.dumps(payload), headers=headers).json()
 	result = None
